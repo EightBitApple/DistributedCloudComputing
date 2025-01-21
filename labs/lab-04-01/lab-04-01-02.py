@@ -103,13 +103,37 @@ publisher = Publisher()
 subscriber_1 = Subscriber("Subscriber 1")
 subscriber_2 = Subscriber("Subscriber 2")
 subscriber_3 = Subscriber("Subscriber 3")
+subscriber_4 = Subscriber("Alice")
+subscriber_5 = Subscriber("Bob")
 
 # Subscribe subscribers to different topics
 publisher.subscribe(subscriber_1, "sports")          # Subscriber 1 subscribes to "sports"
 publisher.subscribe(subscriber_2, "entertainment")   # Subscriber 2 subscribes to "entertainment"
 publisher.subscribe(subscriber_3, "sports")          # Subscriber 3 subscribes to "sports"
+publisher.subscribe(subscriber_4, "sports")          # Subscriber 4 subscribes to "sports"
+publisher.subscribe(subscriber_4, "entertainment")   # Subscriber 4 subscribes to "entertainment"
+publisher.subscribe(subscriber_5, "entertainment")   # Subscriber 5 subscribes to "entertainment"
 
 # Publish a message to the "sports" topic
 publisher.publish("Soccer match result", "sports")
-# Call the receive method of subscriber_1 to process the message
+
+# Call the receive method of subscribers to process messages
 subscriber_1.receive()
+subscriber_3.receive()
+subscriber_4.receive()
+
+# publish a message to the "entertainment" topic.
+publisher.publish("New series released", "entertainment")
+
+# Call the receive method of subscribers to process messages
+subscriber_2.receive()
+subscriber_4.receive()
+subscriber_5.receive()
+
+# publish a message to the "sports" topic.
+publisher.publish("Cricket match result", "entertainment")
+
+# Call the receive method of subscribers to process messages
+subscriber_2.receive()
+subscriber_4.receive()
+subscriber_5.receive()
